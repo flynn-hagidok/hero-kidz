@@ -5,12 +5,22 @@ import {
     FaStar,
 } from "react-icons/fa";
 
+export async function generateMetadata({ params }) {
+    const { id } = await params;
+    const product = await singleProduct(id);
+    console.log(product, id);
+
+    return {
+        title: product.title,
+    };
+};
+
 const ProductDetailsCard = async ({ params }) => {
 
     const { id } = await params;
-    console.log(id);
+    // console.log(id);
     const product = await singleProduct(id);
-    console.log(product);
+    // console.log(product);
 
     const {
         title,
