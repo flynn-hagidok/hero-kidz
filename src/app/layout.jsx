@@ -1,11 +1,16 @@
-import { Poppins } from "next/font/google";
-import "./globals.css";
 import Navbar from "@/components/layouts/Navbar";
 import Footer from "@/components/layouts/Footer";
+import { Poppins } from "next/font/google";
+import localFont from 'next/font/local'
+import "./globals.css";
 
-const poppins = Poppins({
+export const poppins = Poppins({
   weight: ["100", "200", "400", "500", "600", "800"]
-})
+});
+
+export const fontBangla = localFont({
+  src: "./../fonts/mayaboti-normal.ttf"
+});
 
 export const metadata = {
   title: "Hero Kidz",
@@ -23,7 +28,7 @@ export default function RootLayout({ children }) {
           <Navbar></Navbar>
         </header>
 
-        <main className="flex-1 w-11/12 mx-auto my-10">
+        <main className="flex-1 w-11/12 mx-auto my-10 min-h-[calc(100svh-302px)]">
           {children}
         </main>
 
