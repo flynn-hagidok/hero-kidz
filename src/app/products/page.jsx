@@ -1,10 +1,11 @@
+import Products from "@/components/home/Products";
 
-const Products = () => {
+const Product = () => {
     return (
         <div>
-            <h2>Products</h2>
+            <Products></Products>
         </div>
     )
 };
 
-export default Products;
+export default Product;
