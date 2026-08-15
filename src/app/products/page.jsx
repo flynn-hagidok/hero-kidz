@@ -1,7 +1,7 @@
 import Products from "@/components/home/Products";
 
 export const metadata = {
-    title: "Products",
+    title: "All Products"
 }
 
 const Product = () => {

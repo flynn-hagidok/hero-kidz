@@ -10,8 +10,34 @@ export async function generateMetadata({ params }) {
     const product = await singleProduct(id);
     console.log(product, id);
 
+    if (!product) {
+        return {
+            title: "Product Not Found",
+            description: "The requested product could not be found.",
+        };
+    }
+
     return {
         title: product.title,
+        description: product.description?.slice(0, 160),
+
+        openGraph: {
+            title: product.title,
+            description: product.description?.slice(0, 160),
+            images: [
+                {
+                    url: product.image,
+                    alt: product.title,
+                },
+            ],
+        },
+
+        twitter: {
+            card: "summary_large_image",
+            title: product.title,
+            description: product.description?.slice(0, 160),
+            images: [product.image],
+        },
     };
 };
 
