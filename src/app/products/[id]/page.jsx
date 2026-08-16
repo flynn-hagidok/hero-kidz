@@ -1,4 +1,5 @@
 import { singleProduct } from "@/action/server/product";
+import CartButtons from "@/components/buttons/CartButtons";
 import Image from "next/image";
 import {
     FaCartPlus,
@@ -8,7 +9,6 @@ import {
 export async function generateMetadata({ params }) {
     const { id } = await params;
     const product = await singleProduct(id);
-    console.log(product, id);
 
     if (!product) {
         return {
@@ -46,7 +46,7 @@ const ProductDetailsCard = async ({ params }) => {
     const { id } = await params;
     // console.log(id);
     const product = await singleProduct(id);
-    // console.log(product);
+    console.log(product);
 
     const {
         title,
@@ -128,10 +128,7 @@ const ProductDetailsCard = async ({ params }) => {
 
                     {/* Add to Cart */}
                     <div className="mt-auto pt-6">
-                        <button className="btn btn-primary w-full gap-2">
-                            <FaCartPlus size={18} />
-                            Add to Cart
-                        </button>
+                        <CartButtons product={product}></CartButtons>
                     </div>
                 </div>
             </div>

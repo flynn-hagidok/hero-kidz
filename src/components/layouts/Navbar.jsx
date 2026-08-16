@@ -44,7 +44,7 @@ const Navbar = () => {
                 <Link href={"/cart"} className='btn btn-primary'>
                     <FiShoppingCart />
                 </Link>
-                <Link href={"/login"}>
+                <Link href={"/auth/login"}>
                     <button className='btn btn-outline btn-primary'>Login</button>
                 </Link>
             </div>

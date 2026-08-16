@@ -1,4 +1,4 @@
-import { FaStar, FaShoppingCart } from "react-icons/fa";
+import { FaStar } from "react-icons/fa";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -63,10 +63,9 @@ const ProductCards = ({ product }) => {
                         ৳{price.toLocaleString()}
                     </p>
 
-                    <button className="btn btn-primary btn-sm gap-2">
-                        <FaShoppingCart />
-                        Add
-                    </button>
+                    <Link href={`/products/${_id}`} className="btn btn-primary btn-sm gap-2">
+                        View Details
+                    </Link>
                 </div>
             </div>
         </div>

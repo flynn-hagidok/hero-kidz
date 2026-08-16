@@ -30,19 +30,19 @@ export const metadata = {
     "educational games",
     "learning board",
     "kids learning",
-    "Hero C Kidz",
+    "Hero Kidz",
   ],
 
   authors: [
     {
-      name: "Hero C Kidz",
+      name: "Hero Kidz",
     },
   ],
 
-  creator: "Hero C Kidz",
-  publisher: "Hero C Kidz",
+  creator: "Hero Kidz",
+  publisher: "Hero Kidz",
 
-  applicationName: "Hero C Kidz",
+  applicationName: "Hero Kidz",
 
   robots: {
     index: true,
@@ -55,7 +55,7 @@ export const metadata = {
       "max-video-preview": -1,
     },
   },
-  
+
   icons: {
     icon: "/favicon.ico",
     shortcut: "/favicon.ico",
@@ -65,27 +65,27 @@ export const metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://your-domain.com",
-    siteName: "Hero C Kidz",
-    title: "Hero C Kidz | Educational Toys for Kids",
+    url: "https://hero-kidz-nine-lilac.vercel.app",
+    siteName: "Hero Kidz",
+    title: "Hero Kidz | Educational Toys for Kids",
     description:
       "Discover educational toys, learning boards, puzzles, and fun learning products for children at Hero C Kidz.",
     images: [
       {
-        url: "/og-image.png",
+        url: "https://i.ibb.co.com/HpY1Xwg8/Screenshot-2026-08-16-005422.png",
         width: 1200,
         height: 630,
-        alt: "Hero C Kidz - Educational Toys for Kids",
+        alt: "Hero Kidz - Educational Toys for Kids",
       },
     ],
   },
 
   twitter: {
     card: "summary_large_image",
-    title: "Hero C Kidz | Educational Toys for Kids",
+    title: "Hero Kidz | Educational Toys for Kids",
     description:
       "Discover educational toys, learning boards, puzzles, and fun learning products for children.",
-    images: ["/og-image.png"],
+    images: ["https://i.ibb.co.com/HpY1Xwg8/Screenshot-2026-08-16-005422.png"],
   },
 };
 
@@ -100,7 +100,7 @@ export default function RootLayout({ children }) {
           <Navbar></Navbar>
         </header>
 
-        <main className="flex-1 w-11/12 mx-auto my-10 min-h-[calc(100svh-302px)]">
+        <main className="flex-1 w-11/12 mx-auto my-4 min-h-[calc(100svh-302px)]">
           {children}
         </main>
 

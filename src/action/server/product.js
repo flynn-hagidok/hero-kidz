@@ -9,10 +9,15 @@ export const getProduct = async () => {
 };
 
 export const singleProduct = async (id) => {
+
+    if (id.length != 24) {
+        return {}
+    };
+
     const query = {
         _id: new ObjectId(id)
     };
 
     const product = await dbConnect(collection.PRODUCTS).findOne(query);
-    return product || {};
+    return { ...product, _id: product._id.toString() } || {};
 };
