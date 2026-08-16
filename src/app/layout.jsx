@@ -3,6 +3,7 @@ import Footer from "@/components/layouts/Footer";
 import { Poppins } from "next/font/google";
 import localFont from 'next/font/local'
 import "./globals.css";
+import NextAuthProvider from "@/provider/NextAuthProvider";
 
 export const poppins = Poppins({
   weight: ["100", "200", "400", "500", "600", "800"]
@@ -95,19 +96,21 @@ export default function RootLayout({ children }) {
       lang="en"
       className={`${poppins.className} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">
-        <header className="w-11/12 mx-auto py-2">
-          <Navbar></Navbar>
-        </header>
+      <NextAuthProvider>
+        <body className="min-h-full flex flex-col">
+          <header className="w-11/12 mx-auto py-2">
+            <Navbar></Navbar>
+          </header>
 
-        <main className="flex-1 w-11/12 mx-auto my-4 min-h-[calc(100svh-302px)]">
-          {children}
-        </main>
+          <main className="flex-1 w-11/12 mx-auto my-4 min-h-[calc(100svh-302px)]">
+            {children}
+          </main>
 
-        <footer>
-          <Footer></Footer>
-        </footer>
-      </body>
+          <footer>
+            <Footer></Footer>
+          </footer>
+        </body>
+      </NextAuthProvider>
     </html>
   );
 }

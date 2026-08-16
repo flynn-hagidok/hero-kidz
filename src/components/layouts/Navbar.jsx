@@ -1,8 +1,9 @@
-import React from 'react';
-import Logo from './Logo';
+import { FiShoppingCart } from 'react-icons/fi';
 import NavLinks from '../buttons/NavLinks';
 import Link from 'next/link';
-import { FiShoppingCart } from 'react-icons/fi';
+import React from 'react';
+import Logo from './Logo';
+import AuthButton from '../buttons/AuthButton';
 
 const Navbar = () => {
 
@@ -44,9 +45,10 @@ const Navbar = () => {
                 <Link href={"/cart"} className='btn btn-primary'>
                     <FiShoppingCart />
                 </Link>
-                <Link href={"/auth/login"}>
+                {/* <Link href={"/login"}>
                     <button className='btn btn-outline btn-primary'>Login</button>
-                </Link>
+                </Link> */}
+                <AuthButton></AuthButton>
             </div>
         </div>
     );

@@ -24,7 +24,7 @@ const RegisterForm = () => {
         const result = await postUser(newUser);
         if (result.acknowledged) {
             alert("successful. please login");
-            router.push("/auth/login");
+            router.push("/login");
         }
     };
 
@@ -113,7 +113,7 @@ const RegisterForm = () => {
                     <p className="text-center mt-5 text-sm">
                         Already have an account?{" "}
                         <Link
-                            href="/auth/login"
+                            href="/login"
                             className="text-primary font-semibold hover:underline"
                         >
                             Login

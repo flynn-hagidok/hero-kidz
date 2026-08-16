@@ -46,7 +46,7 @@ const ProductDetailsCard = async ({ params }) => {
     const { id } = await params;
     // console.log(id);
     const product = await singleProduct(id);
-    console.log(product);
+    // console.log(product);
 
     const {
         title,

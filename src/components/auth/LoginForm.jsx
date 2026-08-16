@@ -1,10 +1,33 @@
 "use client"
 
+import { FaGoogle } from 'react-icons/fa';
+import { signIn } from 'next-auth/react';
 import Link from 'next/link';
 import React from 'react';
-import { FaGoogle } from 'react-icons/fa';
+import Swal from 'sweetalert2';
+import { useRouter } from 'next/navigation';
 
 const LoginForm = () => {
+
+    const router = useRouter();
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const form = e.target;
+        const email = form.email.value;
+        const password = form.password.value;
+        // console.log(email, password);
+
+        const result = await signIn("credentials", { email, password, redirect: false });
+        console.log(result);
+        if (!result.ok) {
+            Swal.fire("Error", "Data doesn't matched", "error");
+        } else {
+            Swal.fire("Success", "Welcome to Hero Kidz", "success");
+            router.push("/");
+        }
+    }
+
     return (
         <div className="min-h-screen flex items-center justify-center bg-base-200 px-4">
             <div className="card w-full max-w-md bg-base-100 shadow-xl">
@@ -17,7 +40,7 @@ const LoginForm = () => {
                         Login to your account
                     </p>
 
-                    <form className="space-y-4">
+                    <form onSubmit={handleSubmit} className="space-y-4">
                         {/* Email */}
                         <div className="form-control">
                             <label className="label">
@@ -70,7 +93,7 @@ const LoginForm = () => {
                     <p className="text-center mt-5 text-sm">
                         Don`t have an account?{" "}
                         <Link
-                            href="/auth/register"
+                            href="/register"
                             className="text-primary font-semibold hover:underline"
                         >
                             Register
