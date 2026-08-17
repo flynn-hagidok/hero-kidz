@@ -1,25 +1,31 @@
 "use client"
 
-import { FaGoogle } from 'react-icons/fa';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { signIn } from 'next-auth/react';
+import SocialLogin from './SocialLogin';
+import Swal from 'sweetalert2';
 import Link from 'next/link';
 import React from 'react';
-import Swal from 'sweetalert2';
-import { useRouter } from 'next/navigation';
 
 const LoginForm = () => {
 
     const router = useRouter();
+    const params = useSearchParams();
+    const callBack = params.get("callbackUrl") || "/"
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         const form = e.target;
         const email = form.email.value;
         const password = form.password.value;
-        // console.log(email, password);
 
-        const result = await signIn("credentials", { email, password, redirect: false });
-        console.log(result);
+        const result = await signIn("credentials", {
+            email,
+            password,
+            // redirect: false,
+            callbackUrl: callBack
+        });
+        // console.log(result);
         if (!result.ok) {
             Swal.fire("Error", "Data doesn't matched", "error");
         } else {
@@ -81,19 +87,21 @@ const LoginForm = () => {
                     <div className="divider">OR</div>
 
                     {/* Google Login */}
-                    <button
+                    {/* <button
                         type="button"
                         className="btn btn-outline w-full gap-2"
                     >
                         <FaGoogle />
                         Continue with Google
-                    </button>
+                    </button> */}
+
+                    <SocialLogin></SocialLogin>
 
                     {/* Register Link */}
                     <p className="text-center mt-5 text-sm">
                         Don`t have an account?{" "}
                         <Link
-                            href="/register"
+                            href={`/register?callbackUrl=${callBack}`}
                             className="text-primary font-semibold hover:underline"
                         >
                             Register

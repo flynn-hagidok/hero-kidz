@@ -1,5 +1,6 @@
 "use client"
 
+import { useSession } from 'next-auth/react';
 import { usePathname, useRouter } from 'next/navigation';
 import React from 'react';
 import { FaCartPlus } from 'react-icons/fa';
@@ -7,14 +8,14 @@ import { FaCartPlus } from 'react-icons/fa';
 const CartButtons = ({ product }) => {
 
     const pathname = usePathname();
+    const session = useSession();
     const router = useRouter();
-    const isLogin = false;
 
     const add2Cart = () => {
-        if (isLogin) {
+        if (session.status === "authenticated") {
             alert(product._id);
-        }else{
-            router.push(`/auth/login?callbacks=${pathname}`)
+        } else {
+            router.push(`/login?callbackUrl=${pathname}`)
         }
     };
 

@@ -1,10 +1,10 @@
 "use client"
 
 import { postUser } from '@/action/server/auth';
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import SocialLogin from './SocialLogin';
+import Link from 'next/link';
 import React from 'react';
-import { FaGoogle } from 'react-icons/fa';
 
 const RegisterForm = () => {
 
@@ -100,14 +100,16 @@ const RegisterForm = () => {
                     <div className="divider">OR</div>
 
                     {/* Google Register */}
-                    <button
+                    {/* <button
                         onClick={handleGoogle}
                         type="button"
                         className="btn btn-outline w-full gap-2"
                     >
                         <FaGoogle />
                         Continue with Google
-                    </button>
+                    </button> */}
+
+                    <SocialLogin></SocialLogin>
 
                     {/* Login Link */}
                     <p className="text-center mt-5 text-sm">

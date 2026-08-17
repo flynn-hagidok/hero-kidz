@@ -7,7 +7,6 @@ import React from 'react';
 const AuthButton = () => {
 
     const session = useSession();
-    console.log(session);
 
     return (
         <div>
