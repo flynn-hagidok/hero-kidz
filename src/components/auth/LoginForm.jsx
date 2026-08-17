@@ -30,7 +30,7 @@ const LoginForm = () => {
             Swal.fire("Error", "Data doesn't matched", "error");
         } else {
             Swal.fire("Success", "Welcome to Hero Kidz", "success");
-            router.push("/");
+            router.push(result.url || callBack);
         }
     }
 

@@ -16,11 +16,11 @@ const SocialLogin = () => {
                 callbackUrl: params.get("callbackUrl") || "/"
             });
 
-        if (result.ok) {
-            Swal.fire("Success", "Welcome", "success");
-        } else {
-            Swal.fire("Error", "Something is wrong", "error");
-        };
+        // if (result.ok) {
+        //     Swal.fire("Success", "Welcome", "success");
+        // } else {
+        //     Swal.fire("Error", "Something is wrong", "error");
+        // };
     }
 
     return (

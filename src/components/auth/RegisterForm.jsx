@@ -1,14 +1,17 @@
 "use client"
 
+import { useRouter, useSearchParams } from 'next/navigation';
 import { postUser } from '@/action/server/auth';
-import { useRouter } from 'next/navigation';
+import { signIn } from 'next-auth/react';
 import SocialLogin from './SocialLogin';
 import Link from 'next/link';
 import React from 'react';
 
 const RegisterForm = () => {
 
-    const router = useRouter();
+    // const router = useRouter();
+    const params = useSearchParams();
+    const callBack = params.get("callbackUrl") || "/";
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -23,14 +26,15 @@ const RegisterForm = () => {
 
         const result = await postUser(newUser);
         if (result.acknowledged) {
+            // router.push("/login");
+            const result = await signIn("credentials", {
+                email,
+                password,
+                callbackUrl: callBack
+            });
             alert("successful. please login");
-            router.push("/login");
         }
     };
-
-    const handleGoogle = () => {
-        alert("No Bro!")
-    }
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-base-200 px-4">
