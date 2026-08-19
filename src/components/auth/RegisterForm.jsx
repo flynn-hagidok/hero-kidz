@@ -6,10 +6,11 @@ import { signIn } from 'next-auth/react';
 import SocialLogin from './SocialLogin';
 import Link from 'next/link';
 import React from 'react';
+import Swal from 'sweetalert2';
 
 const RegisterForm = () => {
 
-    // const router = useRouter();
+    const router = useRouter();
     const params = useSearchParams();
     const callBack = params.get("callbackUrl") || "/";
 
@@ -26,13 +27,18 @@ const RegisterForm = () => {
 
         const result = await postUser(newUser);
         if (result.acknowledged) {
-            // router.push("/login");
             const result = await signIn("credentials", {
                 email,
                 password,
+                redirect: false,
                 callbackUrl: callBack
             });
-            alert("successful. please login");
+            if (result.ok) {
+                Swal.fire("Success", "Register Successfully", "success");
+                router.push(callBack);
+            }
+        } else {
+            Swal.fire("Error", "Something is wrong", "error");
         }
     };
 

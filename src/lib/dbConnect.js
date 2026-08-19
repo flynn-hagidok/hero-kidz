@@ -5,7 +5,8 @@ const dbName = process.env.DB_NAME;
 
 export const collection = {
     PRODUCTS: "products",
-    USER: "users"
+    USER: "users",
+    CART: "cart",
 };
 
 export const dbConnect = (cname) => {

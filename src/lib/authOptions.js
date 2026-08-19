@@ -31,7 +31,7 @@ export const authOptions = {
 
             const isExit = await dbConnect(collection.USER).findOne({
                 email: user.email,
-                provider: account?.provider
+                // provider: account?.provider
             });
 
             if (isExit) {
@@ -49,9 +49,30 @@ export const authOptions = {
 
             const result = await dbConnect(collection.USER).insertOne(newUser);
             return result.acknowledged;
-
-            // console.log({ user, account, profile, email, credentials });
-            // return true;
         },
+
+        async session({ session, token, user }) {
+            if (token) {
+                session.role = token?.role;
+                session.email = token?.email
+            }
+            return session;
+        },
+
+        async jwt({ token, user, account, profile, isNewUser }) {
+            if (user) {
+                if (account.provider === "google") {
+                    const dbUser = await dbConnect(collection.USER).findOne({ email: user.email });
+
+                    token.role = dbUser?.role;
+                    token.email = dbUser?.email
+                } else {
+                    token.role = user?.role;
+                    token.email = user?.email
+                }
+
+            }
+            return token;
+        }
     }
 }

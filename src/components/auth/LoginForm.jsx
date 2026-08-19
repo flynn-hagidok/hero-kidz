@@ -22,7 +22,7 @@ const LoginForm = () => {
         const result = await signIn("credentials", {
             email,
             password,
-            // redirect: false,
+            redirect: false,
             callbackUrl: callBack
         });
         // console.log(result);

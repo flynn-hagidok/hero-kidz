@@ -1,26 +1,29 @@
 "use client"
 
 import { signIn } from "next-auth/react";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { FaGoogle } from "react-icons/fa";
 import Swal from "sweetalert2";
 
 const SocialLogin = () => {
 
     const params = useSearchParams();
+    const router = useRouter();
+    const callBack = params.get("callbackUrl") || "/";
 
     const handleSignIn = async () => {
         const result = await signIn("google",
             {
-                // redirect: false,
-                callbackUrl: params.get("callbackUrl") || "/"
+                redirect: false,
+                callbackUrl: callBack
             });
 
-        // if (result.ok) {
-        //     Swal.fire("Success", "Welcome", "success");
-        // } else {
-        //     Swal.fire("Error", "Something is wrong", "error");
-        // };
+        if (result.ok) {
+            Swal.fire("Success", "Welcome", "success");
+            router.push(callBack);
+        } else {
+            Swal.fire("Error", "Something is wrong", "error");
+        };
     }
 
     return (
