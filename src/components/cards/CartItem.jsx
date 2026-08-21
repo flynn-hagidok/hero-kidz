@@ -1,7 +1,8 @@
 "use client";
 
-import { deleteItem } from "@/action/server/cart";
+import { decreaseItems, deleteItem, increaseItems } from "@/action/server/cart";
 import Image from "next/image";
+import { useState } from "react";
 import {
     FaMinus,
     FaPlus,
@@ -9,8 +10,9 @@ import {
 } from "react-icons/fa";
 import Swal from "sweetalert2";
 
-const CartItem = ({ item, onIncrease, onDecrease }) => {
+const CartItem = ({ item, updateQantity, removeItem }) => {
     const { _id, product_image, title, price, quantity } = item;
+    const [loading, setLoading] = useState(false);
 
     const handleDelete = (id) => {
         Swal.fire({
@@ -25,6 +27,7 @@ const CartItem = ({ item, onIncrease, onDecrease }) => {
             if (result.isConfirmed) {
                 const result = await deleteItem(id);
                 if (result.success) {
+                    removeItem(id);
                     Swal.fire({
                         title: "Deleted!",
                         text: "Your item has been deleted.",
@@ -39,7 +42,27 @@ const CartItem = ({ item, onIncrease, onDecrease }) => {
                 }
             }
         });
-    }
+    };
+
+    const onIncrease = async () => {
+        setLoading(true);
+        const result = await increaseItems(_id, quantity);
+        if (result.success) {
+            Swal.fire("Success", "Item increase", "success");
+            updateQantity(_id, quantity + 1)
+        }
+        setLoading(false);
+    };
+
+    const onDecrease = async () => {
+        setLoading(true);
+        const result = await decreaseItems(_id, quantity);
+        if (result.success) {
+            Swal.fire("Success", "Item decrease", "success");
+            updateQantity(_id, quantity - 1)
+        }
+        setLoading(false);
+    };
 
     return (
         <div className="flex flex-col sm:flex-row items-center gap-4 p-4 bg-base-100 border border-base-300 rounded-xl shadow-sm">
@@ -70,7 +93,7 @@ const CartItem = ({ item, onIncrease, onDecrease }) => {
             <div className="flex items-center border border-base-300 rounded-lg">
                 <button
                     onClick={() => onDecrease(item)}
-                    disabled={quantity <= 1}
+                    disabled={quantity <= 1 || loading}
                     className="btn btn-ghost btn-sm rounded-r-none"
                 >
                     <FaMinus />
@@ -81,7 +104,8 @@ const CartItem = ({ item, onIncrease, onDecrease }) => {
                 </span>
 
                 <button
-                    onClick={() => onIncrease(item)}
+                    onClick={() => onIncrease(_id)}
+                    disabled={quantity >= 10 || loading}
                     className="btn btn-ghost btn-sm rounded-l-none"
                 >
                     <FaPlus />

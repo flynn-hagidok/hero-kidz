@@ -10,8 +10,8 @@ export default async function Home() {
 
   return (
     <div className="md:space-y-30">
-      <Text></Text>
-      <p>{JSON.stringify(session)}</p>
+      {/* <Text></Text> */}
+      {/* <p>{JSON.stringify(session)}</p> */}
       <section>
         <Banner></Banner>
       </section>

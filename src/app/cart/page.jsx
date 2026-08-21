@@ -1,23 +1,21 @@
 import { getProducts } from "@/action/server/cart";
-import CartItem from "@/components/cards/CartItem";
+import Cart from "@/components/home/Cart";
 import React from "react";
 
 const CartPage = async () => {
 
     const cart = await getProducts();
-    console.log(cart);
+    const formattedItems = cart.map((item) => ({
+        ...item,
+        _id: item._id
+    }))
 
     return (
         <div>
             <h2>Total products in cart: {cart.length}</h2>
 
             <div>
-                <div>
-                    {cart.map(item => <CartItem key={item._id.toString()} item={item}></CartItem>)}
-                </div>
-                <div>
-
-                </div>
+                <Cart cartItem={formattedItems}></Cart>
             </div>
         </div>
     )
